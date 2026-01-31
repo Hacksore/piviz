@@ -16,5 +16,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.27.0"
+  "packageManager": "pnpm@10.27.0",
+  "devDependencies": {
+    "@types/node": "^24.10.9",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "ansi-styles": "^6.2.3"
+  }
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
+import ansiStyles from "ansi-styles";
 import { pies } from "../pi.ts";
 
 process.stdout.on("error", (err: NodeJS.ErrnoException) => {
@@ -19,27 +20,24 @@ const COLORS: Record<string, string> = {
   9: "#E56330",
 };
 
-function hexToRgb(hex: string): [number, number, number] {
-  const n = parseInt(hex.slice(1), 16);
-  return [n >> 16, (n >> 8) & 0xff, n & 0xff];
-}
-
-function ansiBg(r: number, g: number, b: number): string {
-  return `\x1b[48;2;${r};${g};${b}m`;
-}
-const white = "\x1b[97m";
-const reset = "\x1b[0m";
-
-const COLS = process.stdout.columns || 80;
+const COLS = 200;
 const digitsPerRow = Math.max(1, Math.floor(COLS / 2));
+const reset = ansiStyles.modifier.reset.close;
+const white = ansiStyles.color.ansi16m(255, 255, 255);
 
 let line = "";
-pies.forEach((val, index) => {
-  const [r, g, b] = hexToRgb(COLORS[val]!);
-  line += ansiBg(r, g, b) + white + val + reset;
-  if ((index + 1) % digitsPerRow === 0) {
-    process.stdout.write(line + "\n");
+pies.forEach((val, i) => {
+  const hex = COLORS[val];
+  if (hex) {
+    const [r, g, b] = ansiStyles.hexToRgb(hex);
+    const bg = ansiStyles.bgColor.ansi16m(r, g, b);
+    line += `${bg}${white}${val}${reset}`;
+  } else {
+    line += val;
+  }
+  if ((i + 1) % digitsPerRow === 0) {
+    process.stdout.write(`${line}\n`);
     line = "";
   }
 });
-if (line) process.stdout.write(line + "\n");
+if (line) process.stdout.write(`${line}\n`);
