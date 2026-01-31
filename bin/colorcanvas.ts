@@ -21,8 +21,10 @@ const COLORS: Record<string, string> = {
 };
 
 const COLS = process.stdout.columns ?? 80;
-const digitsPerRow = Math.max(1, COLS);
 const reset = ansiStyles.modifier.reset.close;
+// Two chars per block so each "pixel" is 2×1 cells → closer to square on most terminals
+const BLOCK_WIDTH = 2;
+const digitsPerRow = Math.max(1, Math.floor(COLS / BLOCK_WIDTH));
 
 let line = "";
 pies.forEach((val, i) => {
@@ -31,9 +33,9 @@ pies.forEach((val, i) => {
     const [r, g, b] = ansiStyles.hexToRgb(hex);
     const bg = ansiStyles.bgColor.ansi16m(r, g, b);
     const fg = ansiStyles.color.ansi16m(r, g, b);
-    line += `${bg}${fg}█${reset}`;
+    line += `${bg}${fg}${"█".repeat(BLOCK_WIDTH)}${reset}`;
   } else {
-    line += val;
+    line += " ".repeat(BLOCK_WIDTH);
   }
   if ((i + 1) % digitsPerRow === 0) {
     process.stdout.write(`${line}\n`);
