@@ -8,14 +8,15 @@ process.stdout.on("error", (err: NodeJS.ErrnoException) => {
   if (err.code !== "EPIPE") throw err;
 });
 
-const HUE_STEP = 360 / 10;
-const SATURATION = 65;
-const VALUE = 96;
+const GREEN_HUE = 120;
+const SATURATION = 70;
+const VALUE_MIN = 30;
+const VALUE_MAX = 95;
 
 const COLORS: Record<string, string> = Object.fromEntries(
   Array.from({ length: 10 }, (_, i) => {
-    const hue = (i * HUE_STEP) % 360;
-    const hex = convert.hsv.hex(hue, SATURATION, VALUE);
+    const value = VALUE_MIN + (i / 9) * (VALUE_MAX - VALUE_MIN);
+    const hex = convert.hsv.hex(GREEN_HUE, SATURATION, Math.round(value));
     return [String(i), `#${hex}`];
   })
 );
