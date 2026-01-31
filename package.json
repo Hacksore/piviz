@@ -11,6 +11,7 @@
     "colorcanvas": "./bin/colorcanvas.ts"
   },
   "scripts": {
+    "fetch-pi": "node --experimental-strip-types scripts/fetch-pi.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
