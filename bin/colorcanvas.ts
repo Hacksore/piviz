@@ -1,24 +1,24 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
 import ansiStyles from "ansi-styles";
+import convert from "color-convert";
 import { pies } from "../pi.ts";
 
 process.stdout.on("error", (err: NodeJS.ErrnoException) => {
   if (err.code !== "EPIPE") throw err;
 });
 
-const COLORS: Record<string, string> = {
-  0: "#702982",
-  1: "#4235B1",
-  2: "#4566C8",
-  3: "#5B90BB",
-  4: "#73AA9A",
-  5: "#84BA6F",
-  6: "#A9BD53",
-  7: "#CEB441",
-  8: "#E39837",
-  9: "#E56330",
-};
+const HUE_STEP = 360 / 10;
+const SATURATION = 65;
+const VALUE = 96;
+
+const COLORS: Record<string, string> = Object.fromEntries(
+  Array.from({ length: 10 }, (_, i) => {
+    const hue = (i * HUE_STEP) % 360;
+    const hex = convert.hsv.hex(hue, SATURATION, VALUE);
+    return [String(i), `#${hex}`];
+  })
+);
 
 const COLS = process.stdout.columns ?? 80;
 const reset = ansiStyles.modifier.reset.close;

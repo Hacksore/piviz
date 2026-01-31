@@ -23,6 +23,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "ansi-styles": "^6.2.3"
+    "ansi-styles": "^6.2.3",
+    "color-convert": "^3.1.3"
   }
 }
