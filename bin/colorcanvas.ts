@@ -20,10 +20,9 @@ const COLORS: Record<string, string> = {
   9: "#E56330",
 };
 
-const COLS = 200;
-const digitsPerRow = Math.max(1, Math.floor(COLS / 2));
+const COLS = process.stdout.columns ?? 80;
+const digitsPerRow = Math.max(1, COLS);
 const reset = ansiStyles.modifier.reset.close;
-const white = ansiStyles.color.ansi16m(255, 255, 255);
 
 let line = "";
 pies.forEach((val, i) => {
@@ -31,7 +30,8 @@ pies.forEach((val, i) => {
   if (hex) {
     const [r, g, b] = ansiStyles.hexToRgb(hex);
     const bg = ansiStyles.bgColor.ansi16m(r, g, b);
-    line += `${bg}${white}${val}${reset}`;
+    const fg = ansiStyles.color.ansi16m(r, g, b);
+    line += `${bg}${fg}█${reset}`;
   } else {
     line += val;
   }
