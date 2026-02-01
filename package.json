@@ -1,17 +1,16 @@
 {
   "name": "colorcanvas",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "a cool math.pi viz",
   "type": "module",
-  "main": "index.js",
   "engines": {
     "node": ">=24.0.0"
   },
   "bin": {
-    "colorcanvas": "./bin/colorcanvas.ts"
+    "colorcanvas": "./src/colorcanvas.ts"
   },
   "scripts": {
-    "dev": "node bin/colorcanvas.ts",
+    "dev": "node src/colorcanvas.ts",
     "fetch-pi": "node scripts/fetch-pi.ts"
   },
   "keywords": [],

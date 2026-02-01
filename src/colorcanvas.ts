@@ -1,8 +1,8 @@
-#!/usr/bin/env -S node --experimental-strip-types
+#!/usr/bin/env -S node
 
 import ansiStyles from "ansi-styles";
 import convert from "color-convert";
-import { pies } from "../pi.ts";
+import { pies } from "./pi.ts";
 
 process.stdout.on("error", (err: NodeJS.ErrnoException) => {
   if (err.code !== "EPIPE") throw err;

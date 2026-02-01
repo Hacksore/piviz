@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --experimental-strip-types
+#!/usr/bin/env -S node
 
 /**
  * Fetches pi digits from pi2e.ch and writes to data/pi.txt.
