@@ -1,16 +1,16 @@
 {
   "name": "piviz",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a cool math.pi viz",
   "type": "module",
   "engines": {
     "node": ">=24.0.0"
   },
   "bin": {
-    "colorcanvas": "./src/colorcanvas.ts"
+    "piviz": "./src/piviz.ts"
   },
   "scripts": {
-    "dev": "node src/colorcanvas.ts",
+    "dev": "node src/piviz.ts",
     "fetch-pi": "node scripts/fetch-pi.ts"
   },
   "keywords": [],
